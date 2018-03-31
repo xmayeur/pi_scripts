@@ -22,6 +22,7 @@ vault:
   
 spammon:
   image: xmayeur/spammon
+  container-name: spammon
   restart: always
   volumes:
     - '/root/:/conf/'
@@ -31,6 +32,7 @@ spammon:
 
 dtdns:
   image: xmayeur/dtdns
+  conatiner-name: dtdns
   restart: always
   volumes:
     - '/root/:/conf/'
@@ -40,6 +42,7 @@ dtdns:
 
 freezer:
   image: xmayeur/monfreezer
+  conatiner-name: freezer
   restart: always
   volumes:
     - '/root/:/conf/'
