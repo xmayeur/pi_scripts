@@ -1,0 +1,47 @@
+portainer:
+  image: portainer/portainer:arm
+  restart: always
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+  expose:
+    - 9000/tcp
+  ports:
+    - 9000:9000
+
+vault:
+  image: xmayeur/vault
+  restart: always
+  volumes:
+    - '/root/:/conf/'
+  expose:
+    - 8080/tcp
+  ports:
+    - 5000:8080
+  
+spammon:
+  image: xmayeur/spammon
+  restart: always
+  volumes:
+    - '/root/:/conf/'
+    - '/var/log/:/var/log/'
+  expose: 
+    - 80/tcp
+
+dtdns:
+  image: xmayeur/dtdns
+  restart: always
+  volumes:
+    - '/root/:/conf/'
+    - '/var/log/:/var/log/'
+  expose: 
+    - 80/tcp
+
+freezer:
+  image: xmayeur/monfreezer
+  restart: always
+  volumes:
+    - '/root/:/conf/'
+    - '/var/log/:/var/log/'
+  expose:
+    - 80/tcp
+
