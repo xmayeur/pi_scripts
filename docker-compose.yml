@@ -1,6 +1,5 @@
 portainer:
   image: portainer/portainer:arm
-  command: portainer --no-auth
   container_name: portainer
   restart: always
   volumes:
