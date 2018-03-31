@@ -1,5 +1,7 @@
 portainer:
   image: portainer/portainer:arm
+  command: portainer --no-auth
+  container_name: portainer
   restart: always
   volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
@@ -10,6 +12,7 @@ portainer:
 
 vault:
   image: xmayeur/vault
+  container_name: vault
   restart: always
   volumes:
     - '/root/:/conf/'
