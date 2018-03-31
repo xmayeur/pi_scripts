@@ -1,52 +1,59 @@
-portainer:
-  image: portainer/portainer:arm
-  container_name: portainer
-  restart: always
-  volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
-  expose:
-    - 9000/tcp
-  ports:
-    - 9000:9000
+version: '2'
+services:
+  portainer:
+    image: portainer/portainer:arm
+    container_name: portainer
+    restart: always
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    expose:
+      - 9000/tcp
+    ports:
+      - 9000:9000
 
-vault:
-  image: xmayeur/vault
-  container_name: vault
-  restart: always
-  volumes:
-    - '/root/:/conf/'
-  expose:
-    - 8080/tcp
-  ports:
-    - 5000:8080
+  vault:
+    image: xmayeur/vault
+    container_name: vault
+    restart: always
+    volumes:
+      - '/root/:/conf/'
+    expose:
+      - 8080/tcp
+    ports:
+      - 5000:8080
   
-spammon:
-  image: xmayeur/spammon
-  container-name: spammon
-  restart: always
-  volumes:
-    - '/root/:/conf/'
-    - '/var/log/:/var/log/'
-  expose: 
-    - 80/tcp
+  spammon:
+    image: xmayeur/spammon
+    container_name: spammon
+    restart: always
+    networks:
+      - spammon
+    volumes:
+      - '/root/:/conf/'
+      - '/var/log/:/var/log/'
+    expose: 
+      - 80/tcp
 
-dtdns:
-  image: xmayeur/dtdns
-  conatiner-name: dtdns
-  restart: always
-  volumes:
-    - '/root/:/conf/'
-    - '/var/log/:/var/log/'
-  expose: 
-    - 80/tcp
+  dtdns:
+    image: xmayeur/dtdns
+    container_name: dtdns
+    restart: always
+    volumes:
+      - '/root/:/conf/'
+      - '/var/log/:/var/log/'
+    expose: 
+      - 80/tcp
 
-freezer:
-  image: xmayeur/monfreezer
-  conatiner-name: freezer
-  restart: always
-  volumes:
-    - '/root/:/conf/'
-    - '/var/log/:/var/log/'
-  expose:
-    - 80/tcp
+  freezer:
+    image: xmayeur/monfreezer
+    container_name: freezer
+    restart: always
+    volumes:
+      - '/root/:/conf/'
+      - '/var/log/:/var/log/'
+    expose:
+      - 80/tcp
 
+networks:
+   spammon:
+     driver: bridge
